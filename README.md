@@ -1,4 +1,6 @@
 # Capgemini LPU Advance Java Practice Repository
+# Java Backend QSpiders Training
+
 
 This repository is a **multi-module learning workspace** for Java topics covered during an advanced Java journey:
 

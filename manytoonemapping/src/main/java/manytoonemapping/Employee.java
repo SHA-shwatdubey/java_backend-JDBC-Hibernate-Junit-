@@ -1,7 +1,10 @@
 package manytoonemapping;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -9,13 +12,27 @@ import jakarta.persistence.Table;
 public class Employee {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private double salary;
 	private String designation;
-	public Employee(int id, String name, double salary, String designation) {
+	
+	@ManyToOne
+	private Department department;
+	
+	
+	
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public Employee(String name, double salary, String designation) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.salary = salary;
 		this.designation = designation;

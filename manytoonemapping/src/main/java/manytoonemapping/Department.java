@@ -1,13 +1,19 @@
 package manytoonemapping;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "dept")
 public class Department {
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "number_sequence")
+	@SequenceGenerator(name = "number_sequence", initialValue = 100, allocationSize = 1)
 	private int id;
 	private String name;
 	private String manager_name;

@@ -1,6 +1,8 @@
 package pom.capgemini.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,12 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<Category>> getAllCategoriesPaginated(Pageable pageable) {
+        Page<Category> categories = categoryService.getAllCategoriesPaginated(pageable);
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 

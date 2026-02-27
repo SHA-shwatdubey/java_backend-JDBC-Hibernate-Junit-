@@ -1,6 +1,8 @@
 package pom.capgemini.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,12 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<Product>> getAllProductsPaginated(Pageable pageable) {
+        Page<Product> products = productService.getAllProductsPaginated(pageable);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
     @GetMapping("/{productId}")
     public ResponseEntity<Product> getProductById(@PathVariable Long productId) {
         Product product = productService.getProductById(productId);
@@ -52,9 +60,21 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @GetMapping("/search/paginated")
+    public ResponseEntity<Page<Product>> searchProductByNamePaginated(@RequestParam String productName, Pageable pageable) {
+        Page<Product> products = productService.searchProductByNamePaginated(productName, pageable);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) {
         List<Product> products = productService.getProductsByCategory(categoryId);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{categoryId}/paginated")
+    public ResponseEntity<Page<Product>> getProductsByCategoryPaginated(@PathVariable Long categoryId, Pageable pageable) {
+        Page<Product> products = productService.getProductsByCategoryPaginated(categoryId, pageable);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

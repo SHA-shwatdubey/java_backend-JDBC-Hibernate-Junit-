@@ -1,6 +1,8 @@
 package pom.capgemini.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pom.capgemini.entity.Product;
 import pom.capgemini.exception.CategoryNotFoundException;
@@ -41,6 +43,10 @@ public class ProductService {
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    public Page<Product> getAllProductsPaginated(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     public Product getProductById(Long productId) {
@@ -84,12 +90,27 @@ public class ProductService {
         return productRepository.findByProductNameContainingIgnoreCase(productName);
     }
 
+    public Page<Product> searchProductByNamePaginated(String productName, Pageable pageable) {
+        if (productName == null || productName.trim().isEmpty()) {
+            throw new InvalidProductDataException("Product name cannot be empty for search");
+        }
+        return productRepository.findByProductNameContainingIgnoreCase(productName, pageable);
+    }
+
     public List<Product> getProductsByCategory(Long categoryId) {
         boolean categoryExists = categoryRepository.existsById(categoryId);
         if (!categoryExists) {
             throw new CategoryNotFoundException("Category not found with ID: " + categoryId);
         }
         return productRepository.findByCategoryCategoryId(categoryId);
+    }
+
+    public Page<Product> getProductsByCategoryPaginated(Long categoryId, Pageable pageable) {
+        boolean categoryExists = categoryRepository.existsById(categoryId);
+        if (!categoryExists) {
+            throw new CategoryNotFoundException("Category not found with ID: " + categoryId);
+        }
+        return productRepository.findByCategoryCategoryId(categoryId, pageable);
     }
 }
 

@@ -1,6 +1,8 @@
 package pom.capgemini.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pom.capgemini.entity.Category;
 import pom.capgemini.exception.CategoryNotFoundException;
@@ -20,6 +22,10 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    public Page<Category> getAllCategoriesPaginated(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
     }
 
     public Category getCategoryById(Long categoryId) {

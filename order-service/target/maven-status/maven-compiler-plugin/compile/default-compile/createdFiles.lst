@@ -1,7 +1,0 @@
-pom\capgemini\orderservice\controller\OrderController.class
-pom\capgemini\orderservice\config\RabbitMQConfig.class
-pom\capgemini\orderservice\dto\OrderEvent.class
-pom\capgemini\orderservice\OrderServiceApplication.class
-pom\capgemini\orderservice\entity\Order.class
-pom\capgemini\orderservice\service\OrderService.class
-pom\capgemini\orderservice\repository\OrderRepository.class

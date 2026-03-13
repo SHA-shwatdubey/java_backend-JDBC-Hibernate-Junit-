@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Component Scanning -->
+    <context:component-scan base-package="pom.capgemini"/>
+
+    <!-- DataSource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/mydb"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!-- EntityManagerFactory -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="pom.capgemini.entity"/>
+        <property name="persistenceProviderClassName" value="org.hibernate.jpa.HibernateJpaProvider"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- TransactionManager -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <!-- Enable @Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- Beans -->
+    <bean id="employeeController" class="pom.capgemini.controller.EmployeeController">
+        <property name="employeeService" ref="employeeService"/>
+    </bean>
+
+    <bean id="employeeService" class="pom.capgemini.service.impl.EmployeeServiceImpl">
+        <property name="employeeDAO" ref="employeeDAO"/>
+    </bean>
+
+    <bean id="employeeDAO" class="pom.capgemini.dao.impl.EmployeeDao"/>
+
+</beans>
+

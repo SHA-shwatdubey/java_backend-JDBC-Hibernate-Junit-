@@ -1,0 +1,323 @@
+BUILD & RUN INSTRUCTIONS
+=========================
+
+PREREQUISITES:
+===============
+1. Java Development Kit (JDK)
+   - Version: 21 or higher
+   - Set JAVA_HOME environment variable
+   - Verify: java -version
+
+2. Apache Maven
+   - Version: 3.6 or higher
+   - Set M2_HOME environment variable
+   - Verify: mvn -version
+
+3. PostgreSQL Database
+   - Version: 10 or higher
+   - Running on: localhost:5432
+   - Database: mydb (create if not exists)
+   - User: postgres
+   - Password: root
+
+4. IDE (Optional but recommended)
+   - IntelliJ IDEA
+   - Eclipse IDE
+   - VS Code with Java Extensions
+
+
+STEP 1: VERIFY POSTGRESQL
+==========================
+Open Command Prompt/PowerShell:
+
+# Connect to PostgreSQL
+psql -U postgres -d postgres -h localhost
+
+# Once connected, create database if not exists
+CREATE DATABASE mydb;
+
+# Connect to mydb
+\c mydb
+
+# Verify connection
+\dt  (should show empty list initially)
+
+# Exit psql
+\q
+
+
+STEP 2: CLEAN BUILD PROJECT
+=============================
+Open Command Prompt/PowerShell in project root:
+
+# Navigate to project directory
+cd C:\Users\Shashwat\OneDrive\Desktop\Spring\Spring_Hibernate
+
+# Clean and build
+mvn clean install
+
+# Expected output:
+# [INFO] Compiling 18 source files
+# [INFO] Building jar: target/Spring_Hibernate-1.0-SNAPSHOT.jar
+# [INFO] BUILD SUCCESS
+
+# If build fails:
+# - Check Java version: java -version
+# - Check Maven version: mvn -version
+# - Check internet connection (for downloading dependencies)
+# - Clear Maven cache: mvn clean
+
+
+STEP 3: RUN THE APPLICATION
+=============================
+Option A: From IDE (IntelliJ IDEA)
+   1. Open project in IntelliJ
+   2. Navigate to: src/main/java/pom/capgemini/Main.java
+   3. Right-click → Run 'Main.main()'
+   4. Watch console for output
+
+Option B: From Command Line
+   1. Build project: mvn clean install
+   2. Run using Maven:
+      mvn exec:java -Dexec.mainClass="pom.capgemini.Main"
+
+   3. Or run JAR directly:
+      java -cp target/Spring_Hibernate-1.0-SNAPSHOT.jar:target/lib/* pom.capgemini.Main
+
+Option C: Using Java directly
+   1. Navigate to project root
+   2. Compile: javac -d target/classes src/main/java/pom/capgemini/*.java
+   3. Run: java -cp target/classes pom.capgemini.Main
+
+
+EXPECTED OUTPUT:
+=================
+========================================
+Spring Application Started Successfully!
+========================================
+Total Beans Registered: 9
+========================================
+
+Testing Database Connections...
+
+PostgreSQL connection test successful!
+Hibernate SessionFactory connection test successful!
+
+========================================
+Employee Management System
+========================================
+
+Adding Employees...
+
+Employee added successfully: Employee{id=1, name='John Doe', email='john@example.com', salary=50000.0, position='Senior Developer', department='IT'}
+Employee added successfully: Employee{id=2, name='Jane Smith', email='jane@example.com', salary=45000.0, position='Developer', department='IT'}
+Employee added successfully: Employee{id=3, name='Bob Johnson', email='bob@example.com', salary=55000.0, position='Manager', department='HR'}
+
+========================================
+All Employees:
+Employee{id=1, name='John Doe', email='john@example.com', salary=50000.0, position='Senior Developer', department='IT'}
+Employee{id=2, name='Jane Smith', email='jane@example.com', salary=45000.0, position='Developer', department='IT'}
+Employee{id=3, name='Bob Johnson', email='bob@example.com', salary=55000.0, position='Manager', department='HR'}
+
+========================================
+Employees in IT Department:
+Employee{id=1, name='John Doe', email='john@example.com', salary=50000.0, position='Senior Developer', department='IT'}
+Employee{id=2, name='Jane Smith', email='jane@example.com', salary=45000.0, position='Developer', department='IT'}
+
+========================================
+Application Ready for Use!
+========================================
+
+
+VERIFY DATABASE
+================
+After running the application, verify data was created:
+
+1. Open PostgreSQL CLI:
+   psql -U postgres -d mydb -h localhost
+
+2. Check employees table:
+   SELECT * FROM employees;
+
+   Expected output:
+   id | name        | email              | salary | position         | department
+   ---+-------------+--------------------+--------+------------------+-----------
+    1 | John Doe    | john@example.com   | 50000  | Senior Developer | IT
+    2 | Jane Smith  | jane@example.com   | 45000  | Developer        | IT
+    3 | Bob Johnson | bob@example.com    | 55000  | Manager          | HR
+
+3. Count employees:
+   SELECT COUNT(*) FROM employees;
+
+   Expected: 3
+
+4. Check table structure:
+   \d employees
+
+   Should show columns: id, name, email, salary, position, department
+
+
+TROUBLESHOOTING
+================
+
+Issue 1: "PostgreSQL connection refused"
+Solution:
+  - Ensure PostgreSQL is running
+  - Check host: localhost (not 127.0.0.1)
+  - Check port: 5432
+  - Check username: postgres
+  - Check password: root
+  - Verify database exists: mydb
+
+Issue 2: "BUILD FAILURE - Compilation errors"
+Solution:
+  - Check Java version >= 21: java -version
+  - Clear Maven cache: mvn clean install -U
+  - Check for syntax errors in .java files
+  - Ensure all imports are available
+
+Issue 3: "NoClassDefFoundError: Jakarta Persistence"
+Solution:
+  - Run: mvn clean install
+  - Ensure pom.xml dependencies are downloaded
+  - Check Maven local repository exists: ~/.m2/repository
+
+Issue 4: "Transaction not active"
+Solution:
+  - Ensure @Transactional annotations are present
+  - Check TransactionManager bean is configured
+  - Verify EntityManagerFactory is properly initialized
+
+Issue 5: "No Entity Manager Provider"
+Solution:
+  - Verify persistence.xml exists in META-INF
+  - Check hibernateProperties in applicationContext.xml
+  - Ensure Hibernate JAR is in classpath
+
+Issue 6: "Application starts but doesn't show output"
+Solution:
+  - Check console settings in IDE
+  - Ensure System.out is not redirected
+  - Check if application hung on database connection
+  - Set timeout in IDE run configuration
+
+
+COMMON COMMANDS
+================
+
+# Build without running tests
+mvn clean install -DskipTests
+
+# Build and show verbose output
+mvn clean install -X
+
+# Update dependencies
+mvn clean install -U
+
+# Run specific test
+mvn test -Dtest=EmployeeServiceTest
+
+# Generate project documentation
+mvn javadoc:javadoc
+
+# Package as JAR
+mvn package
+
+# Install JAR to local Maven repository
+mvn install
+
+# Display dependency tree
+mvn dependency:tree
+
+# Check for outdated dependencies
+mvn versions:display-property-updates
+
+
+DEVELOPMENT WORKFLOW
+=====================
+
+1. Modify code
+2. Build: mvn clean install
+3. Run: Main.java
+4. Check console output
+5. Verify database changes
+6. Repeat
+
+For faster development:
+  - Use IDE built-in run button
+  - Enable auto-reload if using Spring Boot
+  - Keep PostgreSQL running in background
+
+
+PROJECT STRUCTURE FOR FUTURE EXPANSION
+========================================
+
+To add new entity (e.g., Department):
+
+1. Create Entity:
+   pom/capgemini/entity/Department.java
+
+2. Create DAO:
+   pom/capgemini/dao/DepartmentDAO.java
+   pom/capgemini/dao/impl/DepartmentDao.java
+
+3. Create Service:
+   pom/capgemini/service/DepartmentService.java
+   pom/capgemini/service/impl/DepartmentServiceImpl.java
+
+4. Create Controller:
+   pom/capgemini/controller/DepartmentController.java
+
+5. Update Configuration:
+   - Add bean in applicationContext.xml
+   - Add entity in persistence.xml
+
+6. Test:
+   - Build with mvn clean install
+   - Run Main.java
+   - Verify in PostgreSQL
+
+
+PERFORMANCE TIPS
+=================
+
+1. Database Connection:
+   - Use connection pooling (C3P0)
+   - Adjust pool size based on load
+   - Monitor connection leaks
+
+2. Queries:
+   - Use JPQL named queries
+   - Implement pagination for large datasets
+   - Use indexes on frequently queried columns
+
+3. Transactions:
+   - Keep transactions short
+   - Use read-only for queries
+   - Batch inserts/updates
+
+4. Caching:
+   - Consider second-level cache
+   - Use Hibernate query cache
+   - Implement custom caching for hotspots
+
+
+SECURITY CONSIDERATIONS
+========================
+
+For Production:
+1. Move credentials to environment variables
+2. Use encrypted password storage
+3. Implement SSL/TLS for database connection
+4. Add authentication & authorization
+5. Validate all user inputs
+6. Use parameterized queries (already done with JPQL)
+7. Implement rate limiting
+8. Add audit logging
+9. Regular security updates
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    Build & Run Instructions Complete
+═══════════════════════════════════════════════════════════════════════════════
+

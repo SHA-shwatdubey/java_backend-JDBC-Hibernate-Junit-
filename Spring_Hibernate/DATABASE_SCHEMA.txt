@@ -1,0 +1,133 @@
+DATABASE SCHEMA - Employee Management System
+==============================================
+
+The following tables will be created automatically by Hibernate (hbm2ddl.auto=update):
+
+TABLE 1: employees
+==================
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    salary DOUBLE PRECISION NOT NULL,
+    position VARCHAR(100),
+    department VARCHAR(100)
+);
+
+Fields:
+- id: Auto-incrementing primary key
+- name: Employee name (required)
+- email: Email address (required, unique constraint)
+- salary: Salary amount (required, double precision)
+- position: Job position (optional)
+- department: Department name (optional)
+
+Sample Data:
+INSERT INTO employees (name, email, salary, position, department) VALUES
+('John Doe', 'john@example.com', 50000.0, 'Senior Developer', 'IT'),
+('Jane Smith', 'jane@example.com', 45000.0, 'Developer', 'IT'),
+('Bob Johnson', 'bob@example.com', 55000.0, 'Manager', 'HR');
+
+
+TABLE 2: users
+===============
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    age INTEGER
+);
+
+Fields:
+- id: Auto-incrementing primary key
+- name: User name (required)
+- email: Email address (required, unique constraint)
+- age: Age (optional)
+
+
+QUERIES TO TEST THE DATA:
+=========================
+
+-- Get all employees
+SELECT * FROM employees;
+
+-- Get employees in IT department
+SELECT * FROM employees WHERE department = 'IT';
+
+-- Get employees with salary above 50000
+SELECT * FROM employees WHERE salary > 50000;
+
+-- Get employee by email
+SELECT * FROM employees WHERE email = 'john@example.com';
+
+-- Count employees by department
+SELECT department, COUNT(*) as count FROM employees GROUP BY department;
+
+-- Get all employees ordered by salary
+SELECT * FROM employees ORDER BY salary DESC;
+
+-- Get employee details with specific fields
+SELECT id, name, department, salary FROM employees WHERE salary > 40000;
+
+
+SQL UPDATE EXAMPLES:
+====================
+
+-- Update employee salary
+UPDATE employees SET salary = 55000 WHERE id = 1;
+
+-- Update employee department
+UPDATE employees SET department = 'Engineering' WHERE id = 1;
+
+-- Update employee position
+UPDATE employees SET position = 'Lead Developer' WHERE email = 'john@example.com';
+
+
+SQL DELETE EXAMPLES:
+====================
+
+-- Delete employee by ID
+DELETE FROM employees WHERE id = 1;
+
+-- Delete employees from specific department
+DELETE FROM employees WHERE department = 'IT';
+
+-- Delete all employees (use with caution!)
+DELETE FROM employees;
+
+
+INDEXES (Optional - for performance):
+======================================
+
+-- Create unique index on email
+CREATE UNIQUE INDEX idx_employees_email ON employees(email);
+
+-- Create index on department for faster queries
+CREATE INDEX idx_employees_department ON employees(department);
+
+-- Create index on salary for range queries
+CREATE INDEX idx_employees_salary ON employees(salary);
+
+
+CONNECTION DETAILS:
+===================
+Database: mydb
+Host: localhost
+Port: 5432
+User: postgres
+Password: root
+
+Connection String:
+jdbc:postgresql://localhost:5432/mydb
+
+HIBERNATE DDL OPERATION:
+========================
+With hibernate.hbm2ddl.auto=update:
+- Existing tables are preserved
+- New columns are added
+- New tables are created
+- Existing data is NOT deleted
+- Schema changes are applied automatically on application startup
+
+This is useful for development but REQUIRES manual schema management in production!
+

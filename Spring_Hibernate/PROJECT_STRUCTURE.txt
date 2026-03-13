@@ -1,0 +1,96 @@
+PROJECT STRUCTURE - Spring Hibernate Employee Management System
+================================================================
+
+FOLDER STRUCTURE:
+src/
+├── main/
+│   ├── java/pom/capgemini/
+│   │   ├── config/
+│   │   │   └── HibernateConfig.java           (Hibernate & JPA Configuration)
+│   │   ├── controller/
+│   │   │   └── EmployeeController.java        (Employee Request Handler)
+│   │   ├── dao/
+│   │   │   ├── EmployeeDAO.java               (EmployeeDAO Interface)
+│   │   │   └── impl/
+│   │   │       ├── EmployeeDao.java           (EmployeeDAO Implementation with JPA)
+│   │   │       └── UserDAOImpl.java            (UserDAO Implementation - Hibernate)
+│   │   ├── entity/
+│   │   │   ├── Employee.java                  (Employee JPA Entity)
+│   │   │   └── User.java                      (User JPA Entity)
+│   │   ├── exception/
+│   │   │   ├── InvalidDataException.java      (Custom Exception for Invalid Data)
+│   │   │   └── ResourceNotFoundException.java (Custom Exception for Not Found)
+│   │   ├── service/
+│   │   │   ├── EmployeeService.java           (EmployeeService Interface)
+│   │   │   ├── UserService.java               (UserService Interface)
+│   │   │   └── impl/
+│   │   │       ├── EmployeeServiceImpl.java    (EmployeeService Implementation)
+│   │   │       └── UserServiceImpl.java        (UserService Implementation)
+│   │   ├── util/
+│   │   │   ├── LoggerUtil.java                (Logging Utility)
+│   │   │   └── ValidationUtil.java            (Data Validation Utility)
+│   │   ├── AppService.java                    (Application Service Bean)
+│   │   └── Main.java                          (Application Entry Point)
+│   └── resources/
+│       ├── applicationContext.xml             (Spring Configuration)
+│       └── META-INF/
+│           └── persistence.xml                (JPA Persistence Configuration)
+
+LAYERS:
+=======
+1. Controller Layer (EmployeeController)
+   - Handles Employee CRUD operations
+   - Interacts with Service Layer
+
+2. Service Layer (EmployeeService/EmployeeServiceImpl)
+   - Business Logic Implementation
+   - Data Validation
+   - Exception Handling
+   - Interacts with DAO Layer
+
+3. DAO Layer (EmployeeDAO/EmployeeDao)
+   - Data Access Operations
+   - JPQL Queries
+   - EntityManager Management
+   - Database Interaction
+
+4. Entity Layer (Employee, User)
+   - JPA Entities
+   - Table Mapping
+   - Column Definitions
+
+CONFIGURATION:
+===============
+- Spring Context: XML-based configuration
+- Database: PostgreSQL
+- ORM: Hibernate with JPA
+- Transaction Manager: JPA Transaction Manager
+- EntityManager: LocalContainerEntityManagerFactoryBean
+
+KEY FEATURES:
+=============
+✓ Employee CRUD Operations (Create, Read, Update, Delete)
+✓ Find Employees by Department
+✓ Transaction Management with @Transactional
+✓ Custom Exception Handling
+✓ Data Validation
+✓ Logging Utilities
+✓ Component Scanning
+✓ Auto-wiring with @Autowired
+
+DATABASE CREDENTIALS:
+====================
+Driver: org.postgresql.Driver
+URL: jdbc:postgresql://localhost:5432/mydb
+Username: postgres
+Password: root
+Dialect: PostgreSQL
+
+HIBERNATE PROPERTIES:
+====================
+- DDL Auto: update (auto-create/update tables)
+- Show SQL: true (log SQL statements)
+- Format SQL: true (formatted SQL output)
+- Batch Size: 20 (batch operations)
+- Connection Pool: C3P0 (min: 5, max: 20)
+

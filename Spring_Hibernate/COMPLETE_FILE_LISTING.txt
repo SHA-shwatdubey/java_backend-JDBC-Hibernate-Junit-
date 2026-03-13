@@ -1,0 +1,383 @@
+COMPLETE FILE LISTING
+======================
+
+PROJECT ROOT:
+=============
+C:\Users\Shashwat\OneDrive\Desktop\Spring\Spring_Hibernate\
+├── pom.xml
+├── PROJECT_STRUCTURE.txt
+├── QUICK_REFERENCE.txt
+├── SETUP_COMPLETE.txt
+├── DATABASE_SCHEMA.txt
+├── FINAL_SUMMARY.txt
+├── BUILD_AND_RUN.txt
+├── SETUP_CHECKLIST.txt
+└── README.md (this file can be created)
+
+SRC/MAIN/JAVA/POM/CAPGEMINI:
+=============================
+Main.java
+AppService.java
+
+config/
+├── HibernateConfig.java (JPA Configuration)
+└── EmployeeConfig.java (Can be deleted - redundant)
+
+controller/
+└── EmployeeController.java
+
+dao/
+├── EmployeeDAO.java
+├── UserDAO.java
+└── impl/
+    ├── EmployeeDao.java
+    └── UserDAOImpl.java
+
+entity/
+├── Employee.java
+└── User.java
+
+exception/
+├── InvalidDataException.java
+└── ResourceNotFoundException.java
+
+service/
+├── EmployeeService.java
+├── UserService.java
+└── impl/
+    ├── EmployeeServiceImpl.java
+    └── UserServiceImpl.java
+
+util/
+├── ValidationUtil.java
+└── LoggerUtil.java
+
+
+SRC/MAIN/RESOURCES:
+====================
+applicationContext.xml
+└── META-INF/
+    └── persistence.xml
+
+
+FILE DESCRIPTIONS:
+===================
+
+PROJECT CONFIGURATION:
+1. pom.xml
+   - Maven configuration
+   - All dependencies specified
+   - Build plugins configured
+   - Java 21 compiler target
+   Lines: 118
+
+2. HibernateConfig.java
+   - Spring @Configuration class
+   - EntityManagerFactory bean
+   - JpaTransactionManager bean
+   - Component scanning enabled
+   Lines: 38
+
+3. applicationContext.xml
+   - Spring XML configuration
+   - DataSource configuration
+   - EntityManagerFactory setup
+   - Transaction management
+   - Bean definitions for all layers
+   - Component scanning enabled
+   Lines: 110
+
+4. persistence.xml
+   - JPA persistence unit configuration
+   - Hibernate provider specified
+   - Entity class registration
+   - Database connection properties
+   Lines: 59
+
+
+ENTITY LAYER (2 files):
+1. Employee.java
+   - Main entity for the application
+   - 6 fields with JPA annotations
+   - Constructors, getters, setters
+   - toString() method
+   - Database table: employees
+   Lines: 95
+
+2. User.java
+   - Secondary entity for user management
+   - 4 fields with JPA annotations
+   - Constructors, getters, setters
+   - toString() method
+   - Database table: users
+   Lines: 78
+
+
+DAO LAYER (4 files):
+1. EmployeeDAO.java (Interface)
+   - 6 abstract methods
+   - CRUD + search operations
+   Lines: 16
+
+2. EmployeeDao.java (Implementation)
+   - @Repository stereotype
+   - EntityManager injection
+   - JPQL queries
+   - Transaction management
+   - All CRUD methods implemented
+   Lines: 64
+
+3. UserDAO.java (Interface)
+   - 6 abstract methods for User entity
+   Lines: 15
+
+4. UserDAOImpl.java (Implementation)
+   - Hibernate SessionFactory based
+   - CRUD operations for User
+   Lines: 55
+
+
+SERVICE LAYER (4 files):
+1. EmployeeService.java (Interface)
+   - 6 method signatures
+   - Business operation contracts
+   Lines: 15
+
+2. EmployeeServiceImpl.java (Implementation)
+   - @Service stereotype
+   - Dependency injection
+   - Data validation
+   - Exception handling
+   - Business logic for all operations
+   Lines: 95
+
+3. UserService.java (Interface)
+   - 6 method signatures
+   Lines: 14
+
+4. UserServiceImpl.java (Implementation)
+   - Service implementation for User
+   Lines: 50
+
+
+CONTROLLER LAYER (1 file):
+1. EmployeeController.java
+   - @Autowired service injection
+   - 6 public methods for CRUD
+   - Console output for user feedback
+   Lines: 44
+
+
+UTILITY & EXCEPTION CLASSES (4 files):
+1. ValidationUtil.java
+   - Static validation methods
+   - Email validation
+   - Name validation
+   - Age validation
+   - Positive integer validation
+   Lines: 28
+
+2. LoggerUtil.java
+   - SLF4J wrapper methods
+   - Logging utility functions
+   Lines: 25
+
+3. InvalidDataException.java
+   - Custom exception class
+   - Extends RuntimeException
+   - Constructor with message
+   Lines: 10
+
+4. ResourceNotFoundException.java
+   - Custom exception class
+   - Extends RuntimeException
+   - Constructor with message
+   Lines: 10
+
+
+APPLICATION ENTRY POINT (1 file):
+1. Main.java
+   - Application main() method
+   - Spring Context initialization
+   - Bean loading from XML
+   - Database connection testing
+   - Employee CRUD demonstration
+   - Sample data creation
+   - Console output formatting
+   Lines: 58
+
+
+DOCUMENTATION FILES (8 files):
+1. PROJECT_STRUCTURE.txt
+   - Complete project structure overview
+   - Layer descriptions
+   - Configuration details
+   - Feature list
+   Lines: 80
+
+2. QUICK_REFERENCE.txt
+   - Quick usage guide
+   - Employee entity attributes
+   - Controller methods
+   - Transaction management
+   - Validation rules
+   - Example usage
+   Lines: 150
+
+3. SETUP_COMPLETE.txt
+   - Setup completion summary
+   - Changes made list
+   - Folder structure
+   - Configuration overview
+   - Next steps
+   Lines: 120
+
+4. DATABASE_SCHEMA.txt
+   - SQL schema for tables
+   - Sample data insertion
+   - Test queries
+   - Update/delete examples
+   - Index creation
+   Lines: 134
+
+5. FINAL_SUMMARY.txt
+   - Comprehensive project documentation
+   - Complete details for all classes
+   - Configuration specifics
+   - Feature descriptions
+   - Metrics and statistics
+   Lines: 450
+
+6. BUILD_AND_RUN.txt
+   - Prerequisites
+   - Step-by-step build instructions
+   - Run options (IDE, CLI, JAR)
+   - Expected output
+   - Database verification
+   - Troubleshooting guide
+   - Performance tips
+   - Security considerations
+   Lines: 350
+
+7. SETUP_CHECKLIST.txt
+   - Complete checklist of all setup tasks
+   - Verification points
+   - Next steps
+   - Project metrics
+   Lines: 280
+
+8. COMPLETE_FILE_LISTING.txt (this file)
+   - This comprehensive file listing
+   Lines: ~400
+
+
+TOTAL FILE COUNT: 27 files
+  - Java source files: 18
+  - XML configuration files: 2
+  - Text documentation files: 8
+  - pom.xml: 1
+
+TOTAL LINES OF CODE: ~2,500+ lines
+TOTAL DOCUMENTATION: ~2,000+ lines
+
+
+KEY FILES TO UNDERSTAND FIRST:
+===============================
+1. pom.xml - Start here to understand dependencies
+2. applicationContext.xml - Understand Spring configuration
+3. Main.java - See the application in action
+4. Employee.java - Understand the entity structure
+5. EmployeeDAO.java & EmployeeDao.java - Understand data access
+6. EmployeeService.java & EmployeeServiceImpl.java - Understand business logic
+7. EmployeeController.java - Understand request handling
+8. BUILD_AND_RUN.txt - Follow to build and run the project
+
+
+FILE RELATIONSHIP DIAGRAM:
+==========================
+
+Main.java (Entry Point)
+    ↓
+ApplicationContext (Spring XML)
+    ├── EmployeeController
+    │   ↓
+    └── EmployeeService
+        ↓
+        └── EmployeeDAO
+            ↓
+            ├── EntityManager
+            ├── Employee Entity
+            └── PostgreSQL Database
+
+
+DEPENDENCIES BETWEEN FILES:
+============================
+
+pom.xml dependencies:
+  → Spring Framework
+  → Hibernate
+  → Jakarta Persistence
+  → PostgreSQL JDBC
+  → Logging frameworks
+
+applicationContext.xml defines:
+  → DataSource
+  → EntityManagerFactory
+  → TransactionManager
+  → All service beans
+
+Main.java uses:
+  → ApplicationContext
+  → EmployeeController
+  → Employee entity
+
+EmployeeController depends on:
+  → EmployeeService
+
+EmployeeService depends on:
+  → EmployeeDAO
+  → ValidationUtil
+  → Custom Exceptions
+
+EmployeeDAO depends on:
+  → EntityManager
+  → Employee entity
+
+All services depend on:
+  → @Transactional
+  → Spring annotations
+  → Validation utilities
+
+
+BUILD ARTIFACTS:
+=================
+After building with mvn clean install:
+
+target/
+├── classes/ (compiled Java classes)
+├── lib/ (copied dependencies)
+├── Spring_Hibernate-1.0-SNAPSHOT.jar
+└── maven-archiver/
+
+
+RECOMMENDED VIEWING ORDER:
+===========================
+1. SETUP_CHECKLIST.txt - Get overview of what's done
+2. QUICK_REFERENCE.txt - Quick understanding of features
+3. Employee.java - Understand the data model
+4. EmployeeDAO.java - Understand data access interface
+5. EmployeeDao.java - Understand implementation
+6. EmployeeService.java - Understand business logic interface
+7. EmployeeServiceImpl.java - Understand business logic
+8. EmployeeController.java - Understand request handling
+9. Main.java - See everything in action
+10. applicationContext.xml - Understand Spring wiring
+11. BUILD_AND_RUN.txt - Build and run the project
+12. DATABASE_SCHEMA.txt - Understand database structure
+13. FINAL_SUMMARY.txt - Deep dive into all components
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                Complete File Listing and Relationship Guide
+═══════════════════════════════════════════════════════════════════════════════
+

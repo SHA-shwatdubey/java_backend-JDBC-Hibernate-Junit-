@@ -1,0 +1,8 @@
+pom\capgemini\bookservice\BookServiceApplication.class
+pom\capgemini\bookservice\entity\Book.class
+pom\capgemini\bookservice\dto\OrderEvent.class
+pom\capgemini\bookservice\consumer\OrderEventConsumer.class
+pom\capgemini\bookservice\controller\BookController.class
+pom\capgemini\bookservice\repository\BookRepository.class
+pom\capgemini\bookservice\config\RabbitMQConfig.class
+pom\capgemini\bookservice\service\BookService.class

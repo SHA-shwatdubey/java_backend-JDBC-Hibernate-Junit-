@@ -1,0 +1,8 @@
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\repository\BookRepository.java
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\entity\Book.java
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\config\RabbitMQConfig.java
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\BookServiceApplication.java
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\dto\OrderEvent.java
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\controller\BookController.java
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\service\BookService.java
+C:\Users\Shashwat\OneDrive\Desktop\SpringCloud\13th_march_Online_Book_Ordering_System\book-service\src\main\java\pom\capgemini\bookservice\consumer\OrderEventConsumer.java
